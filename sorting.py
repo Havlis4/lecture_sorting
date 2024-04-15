@@ -10,10 +10,23 @@ def read_data(file_name):
     """
     cwd_path = os.getcwd()
     file_path = os.path.join(cwd_path, file_name)
+    import csv
+    data = {}
+    with open (file_path, mode= "r", newline= "") as csvfile:
+        csv_reader = csv.reader(csvfile)
+        headers = next(csv_reader)
+        for header in headers:
+            data[header] = []
 
-
+        for row in csv_reader:
+            for i, value in enumerate(row):
+                data[headers[i]].append(float(value))
+    return data
 def main():
-    pass
+    #pass
+    file_name = "numbers.csv"
+    data = read_data(file_name)
+    print(data)
 
 
 if __name__ == '__main__':
